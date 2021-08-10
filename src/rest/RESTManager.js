@@ -29,7 +29,10 @@ class RESTManager {
   }
 
   getAuth() {
-    const token = this.client.token ?? this.client.accessToken;
+    let token;
+    if (this.client.token) token = this.client.token;
+    else token = this.client.accessToken;
+    
     if (token) return `${this.tokenPrefix} ${token}`;
     throw new Error('TOKEN_MISSING');
   }
